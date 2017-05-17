@@ -11,12 +11,10 @@ import android.view.ViewGroup;
  */
 
 public class Message_fragment extends Fragment {
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
-        return initView(inflater, container);
-    }
+    View rootView;
 
-    private View initView(LayoutInflater inflater, ViewGroup container) {
-        View view = inflater.inflate(R.layout.message_fragment, container, false);
-        return view;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
+        rootView = inflater.inflate(R.layout.message_fragment, container, false);
+        return rootView;
     }
 }

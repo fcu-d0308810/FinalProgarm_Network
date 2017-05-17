@@ -4,9 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,12 +12,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import com.google.android.gms.maps.GoogleMap;
 
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener
+{
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private GoogleMap mMap;
+    public String startLocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //全螢幕這開始
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //全螢幕到這
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -46,20 +56,14 @@ public class MainActivity extends AppCompatActivity
                 drawer.requestLayout();
             }
         };
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         ////////////////drawer動畫程式碼到這////////////////
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -102,9 +106,13 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         if (id == R.id.nav_googlemap) {
             fragment = new GoogleMap_fragment();
-        } else if (id == R.id.nav_fileshare) {
+        } else if (id == R.id.nav_upload) {
             fragment = new FileShare_fragment();
-        } else if (id == R.id.nav_message) {
+        }
+        else if(id == R.id.nav_download){
+            fragment = new FileShare_fragment();
+        }
+        else if (id == R.id.nav_message) {
             fragment = new Message_fragment();
         } else if (id == R.id.nav_other) {
             fragment = new OtherFunction_fragment();

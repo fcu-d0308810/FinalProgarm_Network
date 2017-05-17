@@ -2,22 +2,54 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_googlemap"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Google Mape" />
-        <item
-            android:id="@+id/nav_fileshare"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="File Share" />
-        <item
-            android:id="@+id/nav_message"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Message" />
-        <item
-            android:id="@+id/nav_other"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="other" />
+        <item android:title="   Map">
+            <menu>
+                <item
+                    android:id="@+id/nav_googlemap"
+                    android:icon="@drawable/ic_placeholder"
+                    android:title="Map"
+                    />
+
+            </menu>
+        </item>
+        <item android:title="Message">
+            <menu>
+                <item
+                    android:id="@+id/nav_message"
+                    android:icon="@drawable/ic_menu_talk"
+                    android:title="Message"
+                    />
+            </menu>
+        </item>
+        <item android:title="UpLoad">
+            <menu>
+                <item
+                    android:id="@+id/nav_upload"
+                    android:icon="@drawable/ic_upload"
+                    android:title="File Share"
+                    />
+            </menu>
+        </item>
+        <item android:title="DownLoad">
+            <menu>
+                <item
+                    android:id="@+id/nav_download"
+                    android:icon="@drawable/ic_download"
+                    android:title=""
+
+                    />
+
+            </menu>
+        </item>
+        <item android:title="  Other">
+            <menu>
+                <item
+                    android:id="@+id/nav_other"
+                    android:icon="@drawable/ic_info"
+                    android:title="other"
+                    />
+            </menu>
+        </item>
     </group>
 
 

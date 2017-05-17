@@ -7,7 +7,16 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
+    <!-- 取得精確位子 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 取得較不精確的位子(wifi) -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- 存取 internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 手機震動 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 取得相機使用權 -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
