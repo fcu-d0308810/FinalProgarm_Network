@@ -3,6 +3,7 @@ package com.example.ihaveadream0528.finalprogarm;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,15 +17,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.google.android.gms.maps.GoogleMap;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener
 {
-
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
-    private GoogleMap mMap;
-    public String startLocation;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //全螢幕這開始
@@ -32,7 +32,14 @@ public class MainActivity extends AppCompatActivity implements
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //全螢幕到這
         super.onCreate(savedInstanceState);
+        firebaseAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_main);
+        if(firebaseAuth.getCurrentUser() == null){
+            finish();
+            startActivity(new Intent(MainActivity.this, Login_page.class));
+        }
+
+        firebaseUser = firebaseAuth.getCurrentUser();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         /////////////加入drawer的動畫/////////////
@@ -90,14 +97,16 @@ public class MainActivity extends AppCompatActivity implements
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        //logout function here
+        if (id == R.id.action_logout) {
+            firebaseAuth.signOut();
+            finish();
+            startActivity(new Intent(MainActivity.this, Login_page.class));
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -107,10 +116,10 @@ public class MainActivity extends AppCompatActivity implements
         if (id == R.id.nav_googlemap) {
             fragment = new GoogleMap_fragment();
         } else if (id == R.id.nav_upload) {
-            fragment = new FileShare_fragment();
+            fragment = new Upload_fragment();
         }
         else if(id == R.id.nav_download){
-            fragment = new FileShare_fragment();
+            fragment = new Upload_fragment();
         }
         else if (id == R.id.nav_message) {
             fragment = new Message_fragment();
@@ -120,10 +129,12 @@ public class MainActivity extends AppCompatActivity implements
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTrans = fragmentManager.beginTransaction();
+        fragmentTrans.addToBackStack(null);
         fragmentTrans.replace(R.id.content_main, fragment);
         fragmentTrans.commit();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/upload_relativelayout"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="10dp">
+
+    <Button
+        android:text="select picture"
+        android:id="@+id/pick_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+    <Button
+        android:id="@+id/upload_button"
+        android:text="upload picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/pick_button" />
+    <ImageButton
+        android:layout_toEndOf="@+id/upload_button"
+        android:layout_alignParentBottom="true"
+        android:layout_width="60dp"
+        android:layout_height="49dp"
+        android:id="@+id/shotphoto_button"
+        android:src="@drawable/ic_camera"
+        />
+
+    <ImageView
+        android:src="@drawable/ic_picture_2"
+        android:id="@+id/pick_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+
+</RelativeLayout>

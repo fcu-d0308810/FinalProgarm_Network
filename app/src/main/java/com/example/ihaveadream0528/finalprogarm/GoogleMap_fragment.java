@@ -3,7 +3,6 @@ package com.example.ihaveadream0528.finalprogarm;
 import android.Manifest;
 import android.app.Fragment;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -42,7 +41,7 @@ public class GoogleMap_fragment extends Fragment implements
     private GoogleMap Map;
     private boolean mPermissionDenied = false;
     private LocationManager locationMgr;
-    private LatLng mylocation;
+    public LatLng mylocation;
     public String startLocation;
 
     @Override
@@ -75,11 +74,7 @@ public class GoogleMap_fragment extends Fragment implements
                 // Gets to GoogleMap from the MapView and does initialization stuff
                 if (mMapView != null) {
                     mMapView.getMapAsync(this);
-                    //Map.getUiSettings().setMyLocationButtonEnabled(false);
 
-                    //Map.setMyLocationEnabled(true);
-                    //CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
-                    //Map.animateCamera(cameraUpdate);
                 }
                 break;
             case ConnectionResult.SERVICE_MISSING:
@@ -138,11 +133,10 @@ public class GoogleMap_fragment extends Fragment implements
 
         // Add a marker in Sydney and move the camera
         LatLng fcu = new LatLng(24.180312, 120.644974);
+        Map.addMarker(new MarkerOptions().position(fcu).title("You are here!"));
         Map.setOnMyLocationButtonClickListener(this);
         enableMyLocation();
         googleMap.setOnMapLongClickListener(this);
-
-        Map.addMarker(new MarkerOptions().position(fcu).title("You are here!"));
         Map.moveCamera(CameraUpdateFactory.newLatLngZoom(fcu,15));
     }
     private void enableMyLocation() {
@@ -152,18 +146,10 @@ public class GoogleMap_fragment extends Fragment implements
                 != PackageManager.PERMISSION_GRANTED) {
             /*PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
                     android.Manifest.permission.ACCESS_FINE_LOCATION, true);*/
-            Log.d("PERMISSION_GRANTED","permission has something wrong!");
+            Log.d("PERMISSION_GRANTED","Map permission has something wrong!");
         } else if (Map != null) {
             Map.setMyLocationEnabled(true);
             Map.getUiSettings().setMyLocationButtonEnabled(true);
-            //Map.getUiSettings().setAllGesturesEnabled(true);
-            //get locatin here
-            String provider = this.locationMgr.getBestProvider(new Criteria(), true);
-            provider = LocationManager.NETWORK_PROVIDER;
-            //this.locationMgr.requestLocationUpdates(provider, 1000, 0, (android.location.LocationListener) this);
-            Location location = this.locationMgr.getLastKnownLocation(provider);
-            mylocation = new LatLng(location.getLatitude(),location.getLongitude());
-
         }
     }
 
@@ -180,7 +166,7 @@ public class GoogleMap_fragment extends Fragment implements
     @Override
     public boolean onMyLocationButtonClick() {
         Toast.makeText(this.getActivity(), "MyLocation button clicked", Toast.LENGTH_SHORT).show();
-        return false;
+        return true;
     }
 
     @Override
