@@ -31,11 +31,24 @@
         />
 
     <ImageView
-        android:src="@drawable/ic_picture_2"
         android:id="@+id/pick_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:minHeight="150dp"
+        android:minWidth="150dp"
+        android:src="@drawable/ic_picture_2" />
+
+    <EditText
+        android:id="@+id/filename_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pick_img"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:textAlignment="center"
+        android:inputType="textPersonName"
+        android:hint="file name" />
 
 
 </RelativeLayout>
