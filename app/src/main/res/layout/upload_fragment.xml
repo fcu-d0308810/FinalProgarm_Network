@@ -48,7 +48,9 @@
         android:ems="10"
         android:textAlignment="center"
         android:inputType="textPersonName"
-        android:hint="file name" />
+        android:hint="file name"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#787777"/>
 
 
 </RelativeLayout>

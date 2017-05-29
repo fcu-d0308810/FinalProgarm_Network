@@ -25,6 +25,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import static android.content.Context.LOCATION_SERVICE;
@@ -34,7 +35,7 @@ public class GoogleMap_fragment extends Fragment implements
         GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMapLongClickListener,
         LocationListener,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        ActivityCompat.OnRequestPermissionsResultCallback{
     private View rootView;
     public MapView mMapView;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -43,7 +44,7 @@ public class GoogleMap_fragment extends Fragment implements
     private LocationManager locationMgr;
     public LatLng mylocation;
     public String startLocation;
-
+    private Marker myMarker;
     @Override
     public void onDetach() {
         super.onDetach();
@@ -68,7 +69,7 @@ public class GoogleMap_fragment extends Fragment implements
         }
         switch (GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity())) {
             case ConnectionResult.SUCCESS:
-                Toast.makeText(getActivity(), "SUCCESS", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "You can't find me", Toast.LENGTH_SHORT).show();
                 mMapView = (MapView) rootView.findViewById(R.id.google_map);
                 mMapView.onCreate(saveInstanceState);
                 // Gets to GoogleMap from the MapView and does initialization stuff
@@ -105,20 +106,6 @@ public class GoogleMap_fragment extends Fragment implements
     @Override
     public void onResume() {
         super.onResume();
-        /*String provider = this.locationMgr.getBestProvider(new Criteria(), true);
-        provider = LocationManager.NETWORK_PROVIDER;
-        if (ContextCompat.checkSelfPermission(this.getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("PERMISSION_GRANTED","permission has something wrong!");
-            return;
-        }
-        else{
-            this.locationMgr.requestLocationUpdates(provider, 1000, 0, (android.location.LocationListener) this);
-            Location location = this.locationMgr.getLastKnownLocation(provider);
-            LatLng myloc = new LatLng(location.getLatitude(), location.getLongitude());
-        }
-
-        //m.add(myloc.toString());*/
         mMapView.onResume();
     }
 
@@ -132,30 +119,41 @@ public class GoogleMap_fragment extends Fragment implements
         Map = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng fcu = new LatLng(24.180312, 120.644974);
-        Map.addMarker(new MarkerOptions().position(fcu).title("You are here!"));
+        LatLng fcu = new LatLng(24.179022, 120.648376);
+        myMarker = Map.addMarker(new MarkerOptions().position(fcu).title("You are here!"));
         Map.setOnMyLocationButtonClickListener(this);
         enableMyLocation();
         googleMap.setOnMapLongClickListener(this);
-        Map.moveCamera(CameraUpdateFactory.newLatLngZoom(fcu,15));
+        Map.moveCamera(CameraUpdateFactory.newLatLngZoom(fcu,17));
     }
     private void enableMyLocation() {
-        if (ContextCompat.checkSelfPermission(this.getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(this.getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             /*PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
                     android.Manifest.permission.ACCESS_FINE_LOCATION, true);*/
             Log.d("PERMISSION_GRANTED","Map permission has something wrong!");
-        } else if (Map != null) {
+        }
+        if (Map != null) {
             Map.setMyLocationEnabled(true);
             Map.getUiSettings().setMyLocationButtonEnabled(true);
+
         }
     }
 
     @Override
     public void onLocationChanged(Location location) {
-
+        Log.d("location:",location.toString());
+       if( location != null){
+           double latitude = location.getLatitude();
+           double longitude = location.getLongitude();
+           LatLng latLng = new LatLng(latitude, longitude);
+           Map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+           Map.animateCamera(CameraUpdateFactory.zoomTo(15));
+           myMarker.remove();
+           myMarker = Map.addMarker(new MarkerOptions().position(latLng).title("You are here!"));
+       }
     }
 
     @Override

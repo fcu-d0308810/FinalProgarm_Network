@@ -4,9 +4,18 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
         android:id="@+id/download_listview">
-
     </ListView>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:minHeight="150dp"
+        android:minWidth="150dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/download_imageview"
+        android:src="@drawable/ic_picture_2"/>
+
 
 </RelativeLayout>

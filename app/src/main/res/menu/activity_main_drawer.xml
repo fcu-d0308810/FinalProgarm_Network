@@ -2,6 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+        <item android:title="    Me">
+            <menu>
+                <item
+                    android:id="@+id/nav_me"
+                    android:icon="@drawable/ic_man"
+                    android:title="Me"
+                    />
+
+            </menu>
+        </item>
         <item android:title="   Map">
             <menu>
                 <item
@@ -39,6 +49,15 @@
 
                     />
 
+            </menu>
+        </item>
+        <item android:title="  Note">
+            <menu>
+                <item
+                    android:id="@+id/nav_note"
+                    android:icon="@drawable/ic_notepad"
+                    android:title="note"
+                    />
             </menu>
         </item>
         <item android:title="  Other">

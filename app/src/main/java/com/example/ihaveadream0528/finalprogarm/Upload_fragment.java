@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,6 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -98,7 +96,7 @@ public class Upload_fragment extends Fragment implements View.OnClickListener{
             }
         }
         else if(command == R.id.upload_button){
-            FileName = fileName_edittext.getText().toString();
+            FileName = fileName_edittext.getText().toString() + ".jpg";
             if(!FileName.equals("")){
                 uploadFile();
             }
@@ -127,7 +125,6 @@ public class Upload_fragment extends Fragment implements View.OnClickListener{
                 uri = data.getData();
                 showPic_view.setImageBitmap(imageBitmap);
 
-                //encodeBitmapAndSaveToFirebase(imageBitmap);
                 Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
             }
         }
@@ -145,17 +142,6 @@ public class Upload_fragment extends Fragment implements View.OnClickListener{
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(intent, CAMERA);
         }
-    }
-    public void encodeBitmapAndSaveToFirebase(Bitmap bitmap) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
-        /*DatabaseReference ref = FirebaseDatabase.getInstance()
-                .getReference(SyncStateContract.Constants.FIREBASE_CHILD_RESTAURANTS)
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(mRestaurant.getPushId())
-                .child("imageUrl");
-        ref.setValue(imageEncoded);*/
     }
     private void uploadFile(){
         //if there is a file to upload

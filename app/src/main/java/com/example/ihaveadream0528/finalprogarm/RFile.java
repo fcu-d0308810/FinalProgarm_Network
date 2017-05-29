@@ -16,7 +16,7 @@ public class RFile {
 
     }
     public RFile(String filename, String user){
-        this.filename = filename;
+        this.filename = filename+".jpg";
         this.user = user;
         DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
         this.time = dateFormat.format(new Date().getTime());

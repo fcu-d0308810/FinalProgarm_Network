@@ -2,6 +2,7 @@ package com.example.ihaveadream0528.finalprogarm;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class Message_fragment extends Fragment implements ValueEventListener
+public class Message_fragment extends Fragment
 {
     View rootView;
     private ArrayList<Message> mMessage;
@@ -40,11 +41,14 @@ public class Message_fragment extends Fragment implements ValueEventListener
         this.User = user;
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
+
+        getMessage();
         rootView = inflater.inflate(R.layout.message_fragment, container, false);
         input_text = (EditText) rootView.findViewById(R.id.message_input_edittext);
         send_button = (Button) rootView.findViewById(R.id.message_send_button);
         listView = (ListView) rootView.findViewById(R.id.message_listView);
-        mMessage = new ArrayList<Message>();
+
+
         send_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,20 +62,29 @@ public class Message_fragment extends Fragment implements ValueEventListener
                 }
             }
         });
-        listView.setAdapter(new Message_adapter(getActivity(), mMessage));
+
         return rootView;
     }
 
-    @Override
-    public void onDataChange(DataSnapshot dataSnapshot) {
-        for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()){
-            Message message = noteSnapshot.getValue(Message.class);
-            mMessage.add(message);
-        }
-    }
+    private void getMessage(){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("message");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mMessage = new ArrayList<Message>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Message message = snapshot.getValue(Message.class);
+                    Log.d("Message:",snapshot.toString());
+                    mMessage.add(message);
+                }
+                listView.setAdapter(new Message_adapter(getActivity(), mMessage));
+            }
 
-    @Override
-    public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
     }
+    
 }

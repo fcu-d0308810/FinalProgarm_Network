@@ -107,13 +107,34 @@ public class MainActivity extends AppCompatActivity implements
 
         return super.onOptionsItemSelected(item);
     }
+    int number = 0;
+    MenuItem item1 = null;
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = null;
-        if (id == R.id.nav_googlemap) {
+        //Here is let the Menu item starup
+        if (item.isChecked()) {
+            item.setChecked(true);
+        }
+        else {
+            if (number==0){
+                item.setChecked(true);
+                item1 = item;
+                number = 1;
+            }
+            else {
+                item1.setChecked(false);
+                item.setChecked(true);
+                item1 = item;
+            }
+        }
+        if(id == R.id.nav_me){
+            fragment = new Me_fragment();
+        }
+        else if (id == R.id.nav_googlemap) {
             fragment = new GoogleMap_fragment();
         } else if (id == R.id.nav_upload) {
             fragment = new Upload_fragment(firebaseUser);
@@ -123,7 +144,11 @@ public class MainActivity extends AppCompatActivity implements
         }
         else if (id == R.id.nav_message) {
             fragment = new Message_fragment(firebaseUser);
-        } else if (id == R.id.nav_other) {
+        }
+        else if(id == R.id.nav_note){
+            fragment = new Note_fragment();
+        }
+        else if (id == R.id.nav_other) {
             fragment = new OtherFunction_fragment();
         }
 
