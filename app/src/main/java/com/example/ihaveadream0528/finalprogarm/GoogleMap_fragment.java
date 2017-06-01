@@ -2,6 +2,7 @@ package com.example.ihaveadream0528.finalprogarm;
 
 import android.Manifest;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -27,6 +29,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -42,9 +50,12 @@ public class GoogleMap_fragment extends Fragment implements
     private GoogleMap Map;
     private boolean mPermissionDenied = false;
     private LocationManager locationMgr;
-    public LatLng mylocation;
-    public String startLocation;
+    private DatabaseReference databaseReference;
+    private FirebaseUser User;
     private Marker myMarker;
+    public GoogleMap_fragment(FirebaseUser user){
+        this.User = user;
+    }
     @Override
     public void onDetach() {
         super.onDetach();
@@ -58,6 +69,7 @@ public class GoogleMap_fragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         // This is view
         rootView = inflater.inflate(R.layout.google_map_fragment, container, false);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("location");
         try {
 
             MapsInitializer.initialize(this.getActivity());
@@ -88,6 +100,7 @@ public class GoogleMap_fragment extends Fragment implements
                 Toast.makeText(getActivity(), GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity()), Toast.LENGTH_SHORT).show();
         }
         this.locationMgr = (LocationManager) this.getActivity().getSystemService(LOCATION_SERVICE);
+        addOtherMark();
         return rootView;
     }
 
@@ -117,14 +130,18 @@ public class GoogleMap_fragment extends Fragment implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Map = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng fcu = new LatLng(24.179022, 120.648376);
-        myMarker = Map.addMarker(new MarkerOptions().position(fcu).title("You are here!"));
-        Map.setOnMyLocationButtonClickListener(this);
         enableMyLocation();
+        //LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        //Location selfLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+
+        LatLng user = new LatLng(24.179022, 120.648376);
+        //LatLng user = new LatLng(selfLocation.getLatitude(),selfLocation.getLongitude());
+        myMarker = Map.addMarker(new MarkerOptions().position(user).title(User.getEmail()));
+        Map.setOnMyLocationButtonClickListener(this);
         googleMap.setOnMapLongClickListener(this);
-        Map.moveCamera(CameraUpdateFactory.newLatLngZoom(fcu,17));
+        Map.moveCamera(CameraUpdateFactory.newLatLngZoom(user,15));
+        user_location myLocation = new user_location(User.getEmail(), user.latitude, user.longitude);
+        databaseReference.child(User.getUid()).setValue(myLocation);
     }
     private void enableMyLocation() {
         if (ContextCompat.checkSelfPermission(this.getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -144,16 +161,7 @@ public class GoogleMap_fragment extends Fragment implements
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.d("location:",location.toString());
-       if( location != null){
-           double latitude = location.getLatitude();
-           double longitude = location.getLongitude();
-           LatLng latLng = new LatLng(latitude, longitude);
-           Map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-           Map.animateCamera(CameraUpdateFactory.zoomTo(15));
-           myMarker.remove();
-           myMarker = Map.addMarker(new MarkerOptions().position(latLng).title("You are here!"));
-       }
+
     }
 
     @Override
@@ -163,7 +171,20 @@ public class GoogleMap_fragment extends Fragment implements
 
     @Override
     public boolean onMyLocationButtonClick() {
-        Toast.makeText(this.getActivity(), "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this.getActivity(), "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        //Acquire the user's location
+        Location selfLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+
+        //Move the map to the user's location
+        LatLng user = new LatLng(selfLocation.getLatitude(), selfLocation.getLongitude());
+        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(user, 15);
+        Map.moveCamera(update);
+        myMarker.remove();
+        myMarker = Map.addMarker(new MarkerOptions().position(user).title(User.getEmail()));
+        user_location myLocation = new user_location(User.getEmail(), user.latitude, user.longitude);
+        databaseReference.child(User.getUid()).setValue(myLocation);
         return true;
     }
 
@@ -179,5 +200,42 @@ public class GoogleMap_fragment extends Fragment implements
         } else {
             mPermissionDenied = true;
         }
+    }
+    private void addOtherMark(){
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.d("other location: ",databaseReference.toString());
+
+
+                user_location otherLocation = dataSnapshot.getValue(user_location.class);
+                if(!otherLocation.getUser().equals(User.getEmail())){
+                    Marker otherMarker = Map.addMarker(new MarkerOptions()
+                            .position(new LatLng(otherLocation.getLatitude(),otherLocation.getLongitude()))
+                            .title(otherLocation.getUser()));
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
