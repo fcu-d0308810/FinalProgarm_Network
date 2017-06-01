@@ -117,8 +117,7 @@ public class Download_fragment extends Fragment {
         }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onProgress(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                progressDialog.setMessage("Downloaded " + ((int) progress) + "%...");
+                progressDialog.setMessage("Downloadeding....");
             }
         });
     }
