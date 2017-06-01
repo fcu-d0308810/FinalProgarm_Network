@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements
             fragment = new Me_fragment();
         }
         else if (id == R.id.nav_googlemap) {
-            fragment = new GoogleMap_fragment();
+            fragment = new GoogleMap_fragment(firebaseUser);
         } else if (id == R.id.nav_upload) {
             fragment = new Upload_fragment(firebaseUser);
         }
