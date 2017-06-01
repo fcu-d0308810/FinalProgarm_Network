@@ -14,7 +14,7 @@ public class Message {
         this.messageUser = messageUser;
 
         // Initialize to current time
-        DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("MM-dd hh:mm:ss");
         messageTime = dateFormat.format(new Date().getTime());
     }
 

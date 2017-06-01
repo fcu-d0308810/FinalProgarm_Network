@@ -49,4 +49,43 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
 
         notificationManager.notify(0, notificationBuilder.build());
     }
+    /*private void sendNotification(String text, String senderId, String receiverId) {
+        //send Push Notification
+        HttpsURLConnection connection = null;
+        try {
+
+            URL url = new URL("https://fcm.googleapis.com/fcm/send");
+            connection = (HttpsURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            //Put below you FCM API Key instead
+            connection.setRequestProperty("Authorization", "key="
+                    + “YOUR_FCM_API_KEY”);
+
+            JSONObject root = new JSONObject();
+            JSONObject data = new JSONObject();
+            data.put(KEY_FCM_TEXT, text);
+            data.put(KEY_FCM_SENDER_ID, sender);
+            root.put("data", data);
+            root.put("to", "/topics/user_" + receiverId);
+
+            byte[] outputBytes = root.toString().getBytes("UTF-8");
+            OutputStream os = connection.getOutputStream();
+            os.write(outputBytes);
+            os.flush();
+            os.close();
+            connection.getInputStream(); //do not remove this line. request will not work without it gg
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) connection.disconnect();
+        }
+    }*/
 }
