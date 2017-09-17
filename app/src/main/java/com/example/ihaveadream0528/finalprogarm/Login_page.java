@@ -21,7 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Login_page extends AppCompatActivity implements View.OnClickListener{
-    private Button login_button;
+    private Button login_button, registered_button;
     private EditText email_edittext, password_edittext;
     private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseAuth firebaseAuth;
@@ -50,6 +50,7 @@ public class Login_page extends AppCompatActivity implements View.OnClickListene
         // Obtain the FirebaseAnalytics instance.
 
         login_button = (Button)findViewById(R.id.login_button);
+        registered_button = (Button)findViewById(R.id.registered_button);
         email_edittext = (EditText)findViewById(R.id.email_edittext);
         password_edittext = (EditText)findViewById(R.id.password_edittext);
         progressDialog = new ProgressDialog(this);
@@ -63,6 +64,9 @@ public class Login_page extends AppCompatActivity implements View.OnClickListene
 
         if(ID == R.id.login_button){
             userLogin();
+        }
+        else if(ID == R.id.registered_button){
+
         }
         else{
 
@@ -92,6 +96,9 @@ public class Login_page extends AppCompatActivity implements View.OnClickListene
                         }
                     }
                 });
+    }
+    private void Registered(){
+        startActivity(new Intent(Login_page.this, MainActivity.class));
     }
 
 }

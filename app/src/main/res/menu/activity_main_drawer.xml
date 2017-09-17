@@ -2,24 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:title="    Me">
+        <item android:title="Curriculum">
             <menu>
                 <item
-                    android:id="@+id/nav_me"
-                    android:icon="@drawable/ic_man"
-                    android:title="Me"
+                    android:id="@+id/nav_curriculum"
+                    android:icon="@drawable/ic_menu_talk"
+                    android:title="Curriculum"
                     />
-
-            </menu>
-        </item>
-        <item android:title="   Map">
-            <menu>
-                <item
-                    android:id="@+id/nav_googlemap"
-                    android:icon="@drawable/ic_placeholder"
-                    android:title="Map"
-                    />
-
             </menu>
         </item>
         <item android:title="Message">
@@ -66,6 +55,7 @@
                     android:id="@+id/nav_other"
                     android:icon="@drawable/ic_info"
                     android:title="other"
+                    android:visible="false"
                     />
             </menu>
         </item>

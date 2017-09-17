@@ -96,7 +96,7 @@ public class Upload_fragment extends Fragment implements View.OnClickListener{
             }
         }
         else if(command == R.id.upload_button){
-            FileName = fileName_edittext.getText().toString() + ".jpg";
+            FileName = fileName_edittext.getText().toString();
             if(!FileName.equals("")){
                 uploadFile();
             }

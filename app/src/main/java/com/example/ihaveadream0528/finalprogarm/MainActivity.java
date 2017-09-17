@@ -131,13 +131,11 @@ public class MainActivity extends AppCompatActivity implements
                 item1 = item;
             }
         }
-        if(id == R.id.nav_me){
-            fragment = new Me_fragment();
-        }
-        else if (id == R.id.nav_googlemap) {
-            fragment = new GoogleMap_fragment(firebaseUser);
-        } else if (id == R.id.nav_upload) {
+        if (id == R.id.nav_upload) {
             fragment = new Upload_fragment(firebaseUser);
+        }
+        else if(id == R.id.nav_curriculum){
+            fragment = new Curriculum_fragment();
         }
         else if(id == R.id.nav_download){
             fragment = new Download_fragment();
