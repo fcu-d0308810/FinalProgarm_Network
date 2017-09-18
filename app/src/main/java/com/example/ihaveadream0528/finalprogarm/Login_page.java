@@ -55,6 +55,7 @@ public class Login_page extends AppCompatActivity implements View.OnClickListene
         password_edittext = (EditText)findViewById(R.id.password_edittext);
         progressDialog = new ProgressDialog(this);
         login_button.setOnClickListener(this);
+        registered_button.setOnClickListener(this);
     }
 
     @Override
@@ -66,7 +67,7 @@ public class Login_page extends AppCompatActivity implements View.OnClickListene
             userLogin();
         }
         else if(ID == R.id.registered_button){
-
+            Registered();
         }
         else{
 
@@ -98,7 +99,8 @@ public class Login_page extends AppCompatActivity implements View.OnClickListene
                 });
     }
     private void Registered(){
-        startActivity(new Intent(Login_page.this, MainActivity.class));
+        finish();
+        startActivity(new Intent(Login_page.this, Register_page.class));
     }
 
 }
