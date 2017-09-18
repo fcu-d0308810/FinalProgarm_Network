@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.13"
             android:background="@drawable/class_item_type"
-            android:text="M"
+            android:text="一"
             android:textSize="30dp"
             android:gravity="center"/>
 
@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.13"
             android:background="@drawable/class_item_type"
-            android:text="T"
+            android:text="二"
             android:textSize="30dp"
             android:gravity="center"/>
 
@@ -40,7 +40,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.13"
             android:background="@drawable/class_item_type"
-            android:text="W"
+            android:text="三"
             android:textSize="30dp"
             android:gravity="center"/>
 
@@ -49,7 +49,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.13"
             android:background="@drawable/class_item_type"
-            android:text="T"
+            android:text="四"
             android:textSize="30dp"
             android:gravity="center"/>
 
@@ -58,7 +58,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.13"
             android:background="@drawable/class_item_type"
-            android:text="F"
+            android:text="五"
             android:textSize="30dp"
             android:gravity="center"/>
     </LinearLayout>
@@ -159,34 +159,44 @@
 
 
             <TextView
+                android:id="@+id/mon_1_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:textSize="20dp"
+                android:clickable="true"
                 android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_weight="0.13"
-                android:background="@drawable/class_day_type1"
-                android:textSize="20dp"
-                android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_weight="0.13"
-                android:background="@drawable/class_day_type1"
-                android:textSize="20dp"
-                android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/mon_2_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:textSize="20dp"
+                android:clickable="true"
                 android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/mon_3_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:background="@drawable/class_day_type1"
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/mon_4_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:background="@drawable/class_day_type1"
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -196,36 +206,44 @@
                 android:gravity="bottom|center" />
 
             <TextView
+                android:id="@+id/mon_5_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/mon_6_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/mon_7_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/mon_8_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
         </LinearLayout>
         -------------------------------------------------------------------
@@ -238,34 +256,44 @@
             android:layout_alignParentStart="true">
 
             <TextView
+                android:id="@+id/tue_1_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type2"
-                android:textSize="20dp"
+                android:clickable="true"
                 android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_weight="0.13"
-                android:background="@drawable/class_day_type2"
-                android:textSize="20dp"
-                android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_weight="0.13"
-                android:background="@drawable/class_day_type2"
-                android:textSize="20dp"
-                android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/tue_2_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type2"
-                android:textSize="20dp"
+                android:clickable="true"
                 android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tue_3_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:background="@drawable/class_day_type2"
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tue_4_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:background="@drawable/class_day_type2"
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -275,36 +303,44 @@
                 android:gravity="bottom|center" />
 
             <TextView
+                android:id="@+id/tue_5_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type2"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/tue_6_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type2"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/tue_7_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type2"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/tue_8_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type2"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
         </LinearLayout>
         --------------------------------------------------------------------
@@ -317,34 +353,44 @@
             android:layout_alignParentStart="true">
 
             <TextView
+                android:id="@+id/wed_1_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:textSize="20dp"
+                android:clickable="true"
                 android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_weight="0.13"
-                android:background="@drawable/class_day_type1"
-                android:textSize="20dp"
-                android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_weight="0.13"
-                android:background="@drawable/class_day_type1"
-                android:textSize="20dp"
-                android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/wed_2_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:textSize="20dp"
+                android:clickable="true"
                 android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/wed_3_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:background="@drawable/class_day_type1"
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/wed_4_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:background="@drawable/class_day_type1"
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -354,36 +400,44 @@
                 android:gravity="bottom|center" />
 
             <TextView
+                android:id="@+id/wed_5_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/wed_6_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/wed_7_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/wed_8_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
         </LinearLayout>
         ----------------------------------------------------------------------------
@@ -396,34 +450,44 @@
             android:layout_alignParentStart="true">
 
             <TextView
+                android:id="@+id/thu_1_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type2"
-                android:textSize="20dp"
+                android:clickable="true"
                 android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_weight="0.13"
-                android:background="@drawable/class_day_type2"
-                android:textSize="20dp"
-                android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_weight="0.13"
-                android:background="@drawable/class_day_type2"
-                android:textSize="20dp"
-                android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/thu_2_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type2"
-                android:textSize="20dp"
+                android:clickable="true"
                 android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/thu_3_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:background="@drawable/class_day_type2"
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/thu_4_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:background="@drawable/class_day_type2"
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -433,36 +497,44 @@
                 android:gravity="bottom|center" />
 
             <TextView
+                android:id="@+id/thu_5_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type2"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/thu_6_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type2"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/thu_7_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type2"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/thu_8_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type2"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
         </LinearLayout>
         ----------------------------------------------------------------------------
@@ -475,34 +547,44 @@
             android:layout_alignParentStart="true">
 
             <TextView
+                android:id="@+id/fri_1_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:textSize="20dp"
+                android:clickable="true"
                 android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_weight="0.13"
-                android:background="@drawable/class_day_type1"
-                android:textSize="20dp"
-                android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_weight="0.13"
-                android:background="@drawable/class_day_type1"
-                android:textSize="20dp"
-                android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/fri_2_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:textSize="20dp"
+                android:clickable="true"
                 android:gravity="bottom|center"
-                android:layout_height="wrap_content" />
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/fri_3_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:background="@drawable/class_day_type1"
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/fri_4_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:background="@drawable/class_day_type1"
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -512,36 +594,44 @@
                 android:gravity="bottom|center" />
 
             <TextView
+                android:id="@+id/fri_5_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/fri_6_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/fri_7_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/fri_8_textview"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.13"
                 android:background="@drawable/class_day_type1"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:gravity="bottom|center"/>
+                android:clickable="true"
+                android:gravity="bottom|center"
+                android:textSize="20dp" />
 
         </LinearLayout>
         ---------------------------------------------------------------------------------
