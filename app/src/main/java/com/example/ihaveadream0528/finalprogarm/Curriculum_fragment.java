@@ -7,12 +7,18 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class Curriculum_fragment extends Fragment{
     private View rootView;
     private TextView[][] Week = new TextView[8][5];
+    private DatabaseReference databaseReference;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         rootView = inflater.inflate(R.layout.curriculum_fragment, container, false);
         DeclareDayTextView(rootView);
@@ -318,14 +324,22 @@ public class Curriculum_fragment extends Fragment{
         });
     }
     private void setAlertDialog(String title){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View inputView = inflater.inflate(R.layout.curriculum_dialog, null);
+        final EditText className_edittext = (EditText) inputView.findViewById(R.id.curriculum_dialog_edittext);
         //set two buttons
-        builder.setView(inflater.inflate(R.layout.curriculum_dialog, null))
+        builder.setView(inputView)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
+                //if your edittext is empty!!
+                if(className_edittext.getText().toString().equals("")){
+                    Toast.makeText(getActivity(), "Your class name is empty.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    uploadClassName(className_edittext.getText().toString());
+                }
             }
         })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -334,8 +348,12 @@ public class Curriculum_fragment extends Fragment{
 
             }
         });
+
         builder.setTitle(title);
         builder.create();
         builder.show();
+    }
+    private void uploadClassName(String className){
+        databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 }
