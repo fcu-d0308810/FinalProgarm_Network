@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         }
         if (id == R.id.nav_upload) {
-            fragment = new Upload_fragment(firebaseUser);
+            fragment = new picture_frament();
         }
         else if(id == R.id.nav_curriculum){
             fragment = new Curriculum_fragment();
