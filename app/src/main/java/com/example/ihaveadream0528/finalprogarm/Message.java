@@ -6,12 +6,12 @@ import java.util.Date;
 
 public class Message {
     private String messageText;
-    private String messageUser;
+    private String messageName;
     private String messageTime;
 
-    public Message(String messageText, String messageUser) {
+    public Message(String messageText, String messageName) {
         this.messageText = messageText;
-        this.messageUser = messageUser;
+        this.messageName = messageName;
 
         // Initialize to current time
         DateFormat dateFormat = new SimpleDateFormat("MM-dd hh:mm:ss");
@@ -31,11 +31,11 @@ public class Message {
     }
 
     public String getMessageUser() {
-        return messageUser;
+        return messageName;
     }
 
-    public void setMessageUser(String messageUser) {
-        this.messageUser = messageUser;
+    public void setMessageUser(String messageName) {
+        this.messageName = messageName;
     }
 
     public String getMessageTime() {

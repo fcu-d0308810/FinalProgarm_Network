@@ -12,12 +12,14 @@ public class RFile {
     private String filename;
     private String user;
     private String time;
+    private String url;
     public RFile(){
 
     }
     public RFile(String filename, String user){
         this.filename = filename+".jpg";
         this.user = user;
+        this.url = "";
         DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
         this.time = dateFormat.format(new Date().getTime());
     }
