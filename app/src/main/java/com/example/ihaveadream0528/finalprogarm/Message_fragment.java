@@ -52,7 +52,7 @@ public class Message_fragment extends Fragment
                 if(!input_text.getText().toString().equals("")){
                     Message message = new Message(input_text.getText().toString(),User.getEmail());
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
-                            .child("message").child("message"+ message.getMessageTime());
+                            .child("TEST0919").child("message").child("message"+ message.getMessageTime());
                     databaseReference.setValue(message);
                     input_text.setText("");
                 }
@@ -62,7 +62,7 @@ public class Message_fragment extends Fragment
         return rootView;
     }
     private void CheckUpdate(){
-        update = FirebaseDatabase.getInstance().getReference().child("message");
+        update = FirebaseDatabase.getInstance().getReference().child("TEST0919").child("message");
         update.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
