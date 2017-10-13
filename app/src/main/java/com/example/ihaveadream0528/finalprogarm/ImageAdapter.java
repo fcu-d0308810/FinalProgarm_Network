@@ -1,27 +1,34 @@
 package com.example.ihaveadream0528.finalprogarm;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
 
 public class ImageAdapter extends BaseAdapter{
     private Context mContext;
-
-    public ImageAdapter(Context c) {
-        mContext = c;
+    private ArrayList<RFile> rFiles;
+    public ImageAdapter(Context context, ArrayList<RFile> rFiles) {
+        this.mContext = context;
+        this.rFiles = rFiles;
+        Log.d("load ", rFiles.get(0).getUrl());
     }
     @Override
     public int getCount() {
-        return 0;
+        return rFiles.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return rFiles.get(i);
     }
 
     @Override
@@ -34,7 +41,7 @@ public class ImageAdapter extends BaseAdapter{
         ImageView imageView;
         if(view == null){
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+            imageView.setLayoutParams(new GridView.LayoutParams(480, 480));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(8, 8, 8, 8);
         }
@@ -42,6 +49,9 @@ public class ImageAdapter extends BaseAdapter{
             imageView = (ImageView) view;
         }
         //imageView.setImageBitmap();
+        //imageView.setImageResource(R.drawable.ic_camera);
+        Picasso.with(mContext).load(rFiles.get(i).getUrl()).fit().centerCrop().error(R.drawable.ic_warning).into(imageView);
+        //
         return imageView;
     }
 }
