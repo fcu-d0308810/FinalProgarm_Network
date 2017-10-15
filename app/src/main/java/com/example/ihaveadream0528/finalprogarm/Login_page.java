@@ -29,6 +29,7 @@ public class Login_page extends AppCompatActivity implements View.OnClickListene
     private EditText email_edittext, password_edittext;
     private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseAuth firebaseAuth;
+    private UserDAO userDAO;
     private DatabaseReference databaseReference;
     private ProgressDialog progressDialog;
     private Bundle bundle;
@@ -39,21 +40,17 @@ public class Login_page extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        userDAO = new UserDAO(getApplicationContext());
+        getLocalUser();
         Window window = this.getWindow();
-        // Followed by google doc.
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this, android.R.color.transparent));
         // For not opaque(transparent) color.
         window.getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        firebaseAuth = FirebaseAuth.getInstance();
-        /*if(firebaseAuth.getCurrentUser()!=null){
-            finish();
-            startActivity(new Intent(Login_page.this, MainActivity.class));
-        }*/
+        //firebaseAuth = FirebaseAuth.getInstance();
+
         setContentView(R.layout.login_page);
 
         // Obtain the FirebaseAnalytics instance.
@@ -96,7 +93,13 @@ public class Login_page extends AppCompatActivity implements View.OnClickListene
             }
         });
     }
+    private void getLocalUser(){
 
+        if(userDAO.getUser() != null){
+            finish();
+            startActivity(new Intent(Login_page.this, MainActivity.class));
+        }
+    }
     @Override
     public void onClick(View view) {
 
@@ -126,15 +129,19 @@ public class Login_page extends AppCompatActivity implements View.OnClickListene
         progressDialog.setMessage("Loading please wait...");
         progressDialog.show();
         for(int i=0; i<user_arrayList.size(); i++){
-            Log.d("user_arrayList :", user_arrayList.get(i).getId());
-            if(user_arrayList.get(i).getId().equals(email) && user_arrayList.get(i).getPassword().equals(password)){
 
-                startActivity(new Intent(Login_page.this, MainActivity.class));
-                finish();
+            if(user_arrayList.get(i).getId().equals(email) && user_arrayList.get(i).getPassword().equals(password)){
+                if(userDAO.insert(user_arrayList.get(i)) == -1){
+                    Toast.makeText(getApplicationContext(), "insert Error!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    finish();
+                    startActivity(new Intent(Login_page.this, MainActivity.class));
+                }
             }
         }
         progressDialog.dismiss();
-        Toast.makeText(getApplicationContext(),"account or password is wrong!", Toast.LENGTH_SHORT).show();
+
 
     }
     private void Registered(){

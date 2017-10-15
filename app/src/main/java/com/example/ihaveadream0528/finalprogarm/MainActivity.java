@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements
 {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+    private UserDAO userDAO;
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //全螢幕這開始
@@ -32,16 +34,13 @@ public class MainActivity extends AppCompatActivity implements
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //全螢幕到這
         super.onCreate(savedInstanceState);
-        firebaseAuth = FirebaseAuth.getInstance();
+        userDAO = new UserDAO(getApplicationContext());
+        getLocalUser();
         setContentView(R.layout.activity_main);
-        if(firebaseAuth.getCurrentUser() == null){
-            finish();
-            startActivity(new Intent(MainActivity.this, Login_page.class));
-        }
 
-        firebaseUser = firebaseAuth.getCurrentUser();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         /////////////加入drawer的動畫/////////////
         final View mainView = (View) findViewById(R.id.allView);
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -72,7 +71,13 @@ public class MainActivity extends AppCompatActivity implements
         navigationView.setNavigationItemSelectedListener(this);
 
     }
-
+    public void getLocalUser(){
+        user = userDAO.getUser();
+        if(user == null){
+            finish();
+            startActivity(new Intent(MainActivity.this, Login_page.class));
+        }
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -92,14 +97,13 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //logout function here
         if (id == R.id.action_logout) {
-            firebaseAuth.signOut();
+            userDAO.delete(user);
+            user = null;
             finish();
             startActivity(new Intent(MainActivity.this, Login_page.class));
             return true;
@@ -141,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements
             fragment = new Download_fragment();
         }
         else if (id == R.id.nav_message) {
-            fragment = new Message_fragment(firebaseUser);
+            fragment = new Message_fragment(user);
         }
         else if(id == R.id.nav_note){
             fragment = new Note_fragment();
