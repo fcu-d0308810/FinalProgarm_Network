@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,14 +25,14 @@ public class Message_fragment extends Fragment
     private ArrayList<Message> mMessage;
     private EditText input_text;
     private Button send_button;
-    private FirebaseUser User;
+    private User User;
     private ListView listView;
     private MyFirebaseMessagingService myFirebaseMessagingService;
     private DatabaseReference update;
     public Message_fragment(){
 
     }
-    public Message_fragment(FirebaseUser user){
+    public Message_fragment(User user){
         this.User = user;
         mMessage = new ArrayList<Message>();
     }
@@ -50,7 +49,7 @@ public class Message_fragment extends Fragment
             @Override
             public void onClick(View view) {
                 if(!input_text.getText().toString().equals("")){
-                    Message message = new Message(input_text.getText().toString(),User.getEmail());
+                    Message message = new Message(input_text.getText().toString(),User.getName());
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
                             .child("TEST0919").child("message").child("message"+ message.getMessageTime());
                     databaseReference.setValue(message);
