@@ -297,6 +297,12 @@ public class picture_frament extends Fragment {
                             progressDialog.setMessage("Uploadeding....");
                         }
                     });
+            riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    //get URL here.
+                }
+            });
         }
         //if there is not any file
         else {
