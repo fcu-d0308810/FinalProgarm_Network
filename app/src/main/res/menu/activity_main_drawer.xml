@@ -2,16 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:title="Curriculum">
+        <item android:title="個人資料">
+            <menu>
+                <item
+                    android:id="@+id/nav_personal"
+                    android:icon="@drawable/ic_man"
+                    android:title="personal"
+                    />
+            </menu>
+        </item>
+        <item android:title="課 表">
             <menu>
                 <item
                     android:id="@+id/nav_curriculum"
-                    android:icon="@drawable/ic_menu_talk"
+                    android:icon="@drawable/ic_curriculum"
                     android:title="Curriculum"
                     />
             </menu>
         </item>
-        <item android:title="Message">
+        <item android:title="訊 息">
             <menu>
                 <item
                     android:id="@+id/nav_message"
@@ -20,27 +29,16 @@
                     />
             </menu>
         </item>
-        <item android:title="UpLoad">
+        <item android:title="圖片共享">
             <menu>
                 <item
-                    android:id="@+id/nav_upload"
-                    android:icon="@drawable/ic_upload"
+                    android:id="@+id/nav_picture"
+                    android:icon="@drawable/ic_picture_2"
                     android:title="File Share"
                     />
             </menu>
         </item>
-        <item android:title="DownLoad">
-            <menu>
-                <item
-                    android:id="@+id/nav_download"
-                    android:icon="@drawable/ic_download"
-                    android:title=""
-
-                    />
-
-            </menu>
-        </item>
-        <item android:title="  Note">
+        <item android:title="公告">
             <menu>
                 <item
                     android:id="@+id/nav_note"
@@ -49,7 +47,7 @@
                     />
             </menu>
         </item>
-        <item android:title="  Other">
+        <item android:title="Other">
             <menu>
                 <item
                     android:id="@+id/nav_other"
