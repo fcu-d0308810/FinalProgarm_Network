@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,14 +20,22 @@ import android.view.WindowManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener
 {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
-    private UserDAO userDAO;
+    private FirebaseDatabase databaseReference;
+    private DatabaseReference UserRef, ClassRef;
     private User user;
+    private String UserID, ClassID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //全螢幕這開始
@@ -34,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //全螢幕到這
         super.onCreate(savedInstanceState);
-        userDAO = new UserDAO(getApplicationContext());
-        getLocalUser();
+        databaseReference = FirebaseDatabase.getInstance();
+        getUser();
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -71,12 +80,61 @@ public class MainActivity extends AppCompatActivity implements
         navigationView.setNavigationItemSelectedListener(this);
 
     }
-    public void getLocalUser(){
-        user = userDAO.getUser();
-        if(user == null){
+    private void getUser(){
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        if(firebaseUser==null){
             finish();
             startActivity(new Intent(MainActivity.this, Login_page.class));
+            return;
         }
+        final String UID = firebaseUser.getUid();
+        UserID = UID;
+        final String[] CID = new String[1];
+        UserRef = databaseReference.getReference();
+        UserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                CID[0] = dataSnapshot.child("user").child(UID).child("class").getValue().toString();
+                ClassID = CID[0];
+                Log.i("Class Token", CID[0]);
+                if(CID[0]!=null){
+                    ClassRef = databaseReference.getReference();
+                    ClassRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.child(CID[0]).child("user").child(UID).getValue()!=null){
+                                user = new User();
+                                user.setName(dataSnapshot.child(CID[0]).child("user").child(UID).child("name").getValue().toString());
+                                if(dataSnapshot.child(CID[0]).child("user").child(UID).child("permission").getValue().toString().equals("1")){
+                                    user.setPermission(1);
+                                }
+                                else{
+                                    user.setPermission(0);
+                                }
+                                user.setIntroduction(dataSnapshot.child(CID[0]).child("user").child(UID).child("self").getValue().toString());
+                                Log.i("user name",user.getName());
+                                Log.i("user permission", String.valueOf(user.getPermission()));
+                                Log.i("user self", user.getIntroduction());
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                else{
+                    Log.i("CID = null","");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
     @Override
     public void onBackPressed() {
@@ -102,8 +160,7 @@ public class MainActivity extends AppCompatActivity implements
 
         //logout function here
         if (id == R.id.action_logout) {
-            userDAO.delete(user);
-            user = null;
+            firebaseAuth.signOut();
             finish();
             startActivity(new Intent(MainActivity.this, Login_page.class));
             return true;
@@ -136,16 +193,16 @@ public class MainActivity extends AppCompatActivity implements
             }
         }
         if (id == R.id.nav_upload) {
-            fragment = new picture_frament();
+            fragment = new picture_frament(ClassID,user);
         }
         else if(id == R.id.nav_curriculum){
-            fragment = new Curriculum_fragment();
+                fragment = new Curriculum_fragment(ClassID,user);
         }
         else if(id == R.id.nav_download){
             fragment = new Download_fragment();
         }
         else if (id == R.id.nav_message) {
-            fragment = new Message_fragment(user);
+            fragment = new Message_fragment(ClassID ,user);
         }
         else if(id == R.id.nav_note){
             fragment = new Note_fragment();

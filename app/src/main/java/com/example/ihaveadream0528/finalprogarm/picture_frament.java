@@ -44,6 +44,7 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -54,6 +55,8 @@ public class picture_frament extends Fragment {
     private GridView gridView;
     private Button upload_button;
     private Uri uri;
+    private User user;
+    private String ClassID;
     private DatabaseReference databaseReference;
     private ArrayList<RFile> file_list;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -61,6 +64,10 @@ public class picture_frament extends Fragment {
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
             android.Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
+    public picture_frament(String ClassID, User user){
+        this.user = user;
+        this.ClassID = ClassID;
+    }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         rootView = inflater.inflate(R.layout.picture_fragment, container, false);
         file_list = new ArrayList<RFile>();
@@ -81,7 +88,7 @@ public class picture_frament extends Fragment {
     }
     private void GetPicture(){
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("TEST0919").child("storage").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(ClassID).child("storage").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
@@ -185,10 +192,8 @@ public class picture_frament extends Fragment {
         final View inputView = inflater.inflate(R.layout.picture_dialog_download, null);
         final ImageView picture_imageView = (ImageView) inputView.findViewById(R.id.picture_dialog_imageview2);
         final TextView user_textview = (TextView) inputView.findViewById(R.id.picture_dialog_download_user);
-        final TextView time_textview = (TextView) inputView.findViewById(R.id.picture_dialog_download_time);
         Picasso.with(getActivity()).load(rFile.getUrl()).fit().centerCrop().error(R.drawable.ic_warning).into(picture_imageView);
         user_textview.setText("Uploader :  "+rFile.getUser());
-        time_textview.setText("Upload Time : "+rFile.getTime());
         builder.setView(inputView);
         //設定Dialog的標題
         builder.setTitle(rFile.getFilename());
@@ -255,6 +260,7 @@ public class picture_frament extends Fragment {
     private void uploadFile(String pictureName){
         //if there is a file to upload
         final String PictureName = pictureName;
+
         if (uri != null) {
 
             //displaying a progress dialog while upload is going on
@@ -263,20 +269,25 @@ public class picture_frament extends Fragment {
             progressDialog.show();
 
             StorageReference riversRef = storageReference.child("images/"+pictureName+".jpg");
+            final StorageReference temp = riversRef;
             riversRef.putFile(uri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            //if the upload is successfull
-                            //hiding the progress dialog
-                            progressDialog.dismiss();
 
-                            //and displaying a success toast
-                            Toast.makeText(getActivity(), "File Uploaded ", Toast.LENGTH_SHORT).show();
-                            RFile rFile = new RFile(PictureName, " ");
-                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
-                                    .child("TEST0919").child("storage").child("file"+rFile.getTime());
-                            databaseReference.setValue(rFile);
+                            progressDialog.dismiss();
+                            temp.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    //get URL here.
+                                    Log.d("URL :",uri.toString());
+                                    Toast.makeText(getActivity(), "File Uploaded ", Toast.LENGTH_SHORT).show();
+                                    RFile rFile = new RFile(PictureName, user.getName(), uri.toString());
+                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
+                                            .child("TEST0919").child("storage").child("file"+ Calendar.getInstance().getTime().toString());
+                                    databaseReference.setValue(rFile);
+                                }
+                            });
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -297,12 +308,7 @@ public class picture_frament extends Fragment {
                             progressDialog.setMessage("Uploadeding....");
                         }
                     });
-            riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    //get URL here.
-                }
-            });
+
         }
         //if there is not any file
         else {

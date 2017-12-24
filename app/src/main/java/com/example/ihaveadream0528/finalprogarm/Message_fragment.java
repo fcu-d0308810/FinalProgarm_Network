@@ -29,11 +29,13 @@ public class Message_fragment extends Fragment
     private ListView listView;
     private MyFirebaseMessagingService myFirebaseMessagingService;
     private DatabaseReference update;
+    private String ClassID;
     public Message_fragment(){
 
     }
-    public Message_fragment(User user){
+    public Message_fragment(String ClassID, User user){
         this.User = user;
+        this.ClassID = ClassID;
         mMessage = new ArrayList<Message>();
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
@@ -51,7 +53,7 @@ public class Message_fragment extends Fragment
                 if(!input_text.getText().toString().equals("")){
                     Message message = new Message(input_text.getText().toString(),User.getName());
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
-                            .child("TEST0919").child("message").child("message"+ message.getMessageTime());
+                            .child(ClassID).child("message").child("message"+ message.getMessageTime());
                     databaseReference.setValue(message);
                     input_text.setText("");
                 }
@@ -61,7 +63,7 @@ public class Message_fragment extends Fragment
         return rootView;
     }
     private void CheckUpdate(){
-        update = FirebaseDatabase.getInstance().getReference().child("TEST0919").child("message");
+        update = FirebaseDatabase.getInstance().getReference().child(ClassID).child("message");
         update.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {

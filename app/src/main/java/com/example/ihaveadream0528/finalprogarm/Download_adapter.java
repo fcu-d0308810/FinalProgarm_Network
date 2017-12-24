@@ -28,7 +28,6 @@ public class Download_adapter extends ArrayAdapter<RFile> {
         TextView time = (TextView) rowView.findViewById(R.id.download_time);
         filename.setText(values.get(position).getFilename());
         user.setText(values.get(position).getUser());
-        time.setText(values.get(position).getTime());
         return rowView;
     }
 }

@@ -19,11 +19,25 @@ public class Curriculum_fragment extends Fragment{
     private View rootView;
     private TextView[][] Week = new TextView[8][5];
     private DatabaseReference databaseReference;
+    private User user;
+    private String ClassID;
+    public Curriculum_fragment(String ClassID, User user){
+        this.ClassID = ClassID;
+        this.user = user;
+    }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         rootView = inflater.inflate(R.layout.curriculum_fragment, container, false);
         DeclareDayTextView(rootView);
-        setOnClickListener();
+        Permission();
         return rootView;
+    }
+    private void Permission(){
+        if(user.getPermission()==1){
+            setOnClickListener_Permission_1();
+        }
+        else{
+            //setOnClickListener_Permission_0();
+        }
     }
     private void DeclareDayTextView(View view){
 
@@ -74,256 +88,507 @@ public class Curriculum_fragment extends Fragment{
         Week[7][4] = (TextView) view.findViewById(R.id.fri_8_textview);
 
     }
-    private void setOnClickListener(){
+    private void setOnClickListener_Permission_1(){
 
 
         //Monday
         Week[0][0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Monday 8:00 ~ 9:00");
+                setAlertDialog_Permission_1("Monday 8:00 ~ 9:00", "Monday", "1");
+
             }
         });
         Week[1][0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Monday 9:00 ~ 10:00");
+                setAlertDialog_Permission_1("Monday 9:00 ~ 10:00", "Monday", "2");
             }
         });
         Week[2][0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Monday 10:00 ~ 11:00");
+                setAlertDialog_Permission_1("Monday 10:00 ~ 11:00", "Monday", "3");
             }
         });
         Week[3][0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Monday 11:00 ~ 12:00");
+                setAlertDialog_Permission_1("Monday 11:00 ~ 12:00", "Monday", "4");
             }
         });
         Week[4][0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Monday 13:00 ~ 14:00");
+                setAlertDialog_Permission_1("Monday 13:00 ~ 14:00", "Monday", "5");
             }
         });
         Week[5][0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Monday 14:00 ~ 15:00");
+                setAlertDialog_Permission_1("Monday 14:00 ~ 15:00", "Monday", "6");
             }
         });
         Week[6][0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Monday 15:00 ~ 16:00");
+                setAlertDialog_Permission_1("Monday 15:00 ~ 16:00", "Monday", "7");
             }
         });
         Week[7][0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Monday 16:00 ~ 17:00");
+                setAlertDialog_Permission_1("Monday 16:00 ~ 17:00", "Monday", "8");
             }
         });
         //Tuesday
         Week[0][1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Tuesday 8:00 ~ 9:00");
+                setAlertDialog_Permission_1("Tuesday 8:00 ~ 9:00", "Tuesday", "1");
             }
         });
         Week[1][1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Tuesday 9:00 ~ 10:00");
+                setAlertDialog_Permission_1("Tuesday 9:00 ~ 10:00", "Tuesday", "2");
             }
         });
         Week[2][1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Tuesday 10:00 ~ 11:00");
+                setAlertDialog_Permission_1("Tuesday 10:00 ~ 11:00", "Tuesday", "3");
             }
         });
         Week[3][1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Tuesday 11:00 ~ 12:00");
+                setAlertDialog_Permission_1("Tuesday 11:00 ~ 12:00", "Tuesday", "4");
             }
         });
         Week[4][1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Tuesday 13:00 ~ 14:00");
+                setAlertDialog_Permission_1("Tuesday 13:00 ~ 14:00", "Tuesday", "5");
             }
         });
         Week[5][1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Tuesday 14:00 ~ 15:00");
+                setAlertDialog_Permission_1("Tuesday 14:00 ~ 15:00", "Tuesday", "6");
             }
         });
         Week[6][1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Tuesday 15:00 ~ 16:00");
+                setAlertDialog_Permission_1("Tuesday 15:00 ~ 16:00", "Tuesday", "7");
             }
         });
         Week[7][1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Tuesday 16:00 ~ 17:00");
+                setAlertDialog_Permission_1("Tuesday 16:00 ~ 17:00", "Tuesday", "8");
             }
         });
         //Wednesday
         Week[0][2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Wednesday 8:00 ~ 9:00");
+                setAlertDialog_Permission_1("Wednesday 8:00 ~ 9:00", "Wednesday", "1");
             }
         });
         Week[1][2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Wednesday 9:00 ~ 10:00");
+                setAlertDialog_Permission_1("Wednesday 9:00 ~ 10:00", "Wednesday", "2");
             }
         });
         Week[2][2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Wednesday 10:00 ~ 11:00");
+                setAlertDialog_Permission_1("Wednesday 10:00 ~ 11:00", "Wednesday", "3");
             }
         });
         Week[3][2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Wednesday 11:00 ~ 12:00");
+                setAlertDialog_Permission_1("Wednesday 11:00 ~ 12:00", "Wednesday", "4");
             }
         });
         Week[4][2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Wednesday 13:00 ~ 14:00");
+                setAlertDialog_Permission_1("Wednesday 13:00 ~ 14:00", "Wednesday", "5");
             }
         });
         Week[5][2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Wednesday 14:00 ~ 15:00");
+                setAlertDialog_Permission_1("Wednesday 14:00 ~ 15:00", "Wednesday", "6");
             }
         });
         Week[6][2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Wednesday 15:00 ~ 16:00");
+                setAlertDialog_Permission_1("Wednesday 15:00 ~ 16:00", "Wednesday", "7");
             }
         });
         Week[7][2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Wednesday 16:00 ~ 17:00");
+                setAlertDialog_Permission_1("Wednesday 16:00 ~ 17:00", "Wednesday", "8");
             }
         });
         //Thursday
         Week[0][3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Thursday 8:00 ~ 9:00");
+                setAlertDialog_Permission_1("Thursday 8:00 ~ 9:00", "Thursday", "1");
             }
         });
         Week[1][3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Thursday 9:00 ~ 10:00");
+                setAlertDialog_Permission_1("Thursday 9:00 ~ 10:00", "Thursday", "2");
             }
         });
         Week[2][3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Thursday 10:00 ~ 11:00");
+                setAlertDialog_Permission_1("Thursday 10:00 ~ 11:00", "Thursday", "3");
             }
         });
         Week[3][3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Thursday 11:00 ~ 12:00");
+                setAlertDialog_Permission_1("Thursday 11:00 ~ 12:00", "Thursday", "4");
             }
         });
         Week[4][3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Thursday 13:00 ~ 14:00");
+                setAlertDialog_Permission_1("Thursday 13:00 ~ 14:00", "Thursday", "5");
             }
         });
         Week[5][3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Thursday 14:00 ~ 15:00");
+                setAlertDialog_Permission_1("Thursday 14:00 ~ 15:00", "Thursday", "6");
             }
         });
         Week[6][3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Thursday 15:00 ~ 16:00");
+                setAlertDialog_Permission_1("Thursday 15:00 ~ 16:00", "Thursday", "7");
             }
         });
         Week[7][3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Thursday 16:00 ~ 17:00");
+                setAlertDialog_Permission_1("Thursday 16:00 ~ 17:00", "Thursday", "8");
             }
         });
         //Friday
         Week[0][4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Friday 8:00 ~ 9:00");
+                setAlertDialog_Permission_1("Friday 8:00 ~ 9:00", "Friday", "1");
             }
         });
         Week[1][4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Friday 9:00 ~ 10:00");
+                setAlertDialog_Permission_1("Friday 9:00 ~ 10:00", "Friday", "2");
             }
         });
         Week[2][4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Friday 10:00 ~ 11:00");
+                setAlertDialog_Permission_1("Friday 10:00 ~ 11:00", "Friday", "3");
             }
         });
         Week[3][4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Friday 11:00 ~ 12:00");
+                setAlertDialog_Permission_1("Friday 11:00 ~ 12:00", "Friday", "4");
             }
         });
         Week[4][4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Friday 13:00 ~ 14:00");
+                setAlertDialog_Permission_1("Friday 13:00 ~ 14:00", "Friday", "5");
             }
         });
         Week[5][4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Friday 14:00 ~ 15:00");
+                setAlertDialog_Permission_1("Friday 14:00 ~ 15:00", "Friday", "6");
             }
         });
         Week[6][4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Friday 15:00 ~ 16:00");
+                setAlertDialog_Permission_1("Friday 15:00 ~ 16:00", "Friday", "7");
             }
         });
         Week[7][4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAlertDialog("Friday 16:00 ~ 17:00");
+                setAlertDialog_Permission_1("Friday 16:00 ~ 17:00", "Friday", "8");
             }
         });
     }
-    private void setAlertDialog(String title){
+    private void setOnClickListener_Permission_0(){
+
+
+        //Monday
+        Week[0][0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Monday 8:00 ~ 9:00");
+
+            }
+        });
+        Week[1][0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Monday 9:00 ~ 10:00");
+            }
+        });
+        Week[2][0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Monday 10:00 ~ 11:00");
+            }
+        });
+        Week[3][0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Monday 11:00 ~ 12:00");
+            }
+        });
+        Week[4][0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Monday 13:00 ~ 14:00");
+            }
+        });
+        Week[5][0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Monday 14:00 ~ 15:00");
+            }
+        });
+        Week[6][0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Monday 15:00 ~ 16:00");
+            }
+        });
+        Week[7][0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Monday 16:00 ~ 17:00");
+            }
+        });
+        //Tuesday
+        Week[0][1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Tuesday 8:00 ~ 9:00");
+            }
+        });
+        Week[1][1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Tuesday 9:00 ~ 10:00");
+            }
+        });
+        Week[2][1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Tuesday 10:00 ~ 11:00");
+            }
+        });
+        Week[3][1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Tuesday 11:00 ~ 12:00");
+            }
+        });
+        Week[4][1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Tuesday 13:00 ~ 14:00");
+            }
+        });
+        Week[5][1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Tuesday 14:00 ~ 15:00");
+            }
+        });
+        Week[6][1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Tuesday 15:00 ~ 16:00");
+            }
+        });
+        Week[7][1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Tuesday 16:00 ~ 17:00");
+            }
+        });
+        //Wednesday
+        Week[0][2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Wednesday 8:00 ~ 9:00");
+            }
+        });
+        Week[1][2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Wednesday 9:00 ~ 10:00");
+            }
+        });
+        Week[2][2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Wednesday 10:00 ~ 11:00");
+            }
+        });
+        Week[3][2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Wednesday 11:00 ~ 12:00");
+            }
+        });
+        Week[4][2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Wednesday 13:00 ~ 14:00");
+            }
+        });
+        Week[5][2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Wednesday 14:00 ~ 15:00");
+            }
+        });
+        Week[6][2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Wednesday 15:00 ~ 16:00");
+            }
+        });
+        Week[7][2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Wednesday 16:00 ~ 17:00");
+            }
+        });
+        //Thursday
+        Week[0][3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Thursday 8:00 ~ 9:00");
+            }
+        });
+        Week[1][3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Thursday 9:00 ~ 10:00");
+            }
+        });
+        Week[2][3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Thursday 10:00 ~ 11:00");
+            }
+        });
+        Week[3][3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Thursday 11:00 ~ 12:00");
+            }
+        });
+        Week[4][3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Thursday 13:00 ~ 14:00");
+            }
+        });
+        Week[5][3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Thursday 14:00 ~ 15:00");
+            }
+        });
+        Week[6][3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Thursday 15:00 ~ 16:00");
+            }
+        });
+        Week[7][3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Thursday 16:00 ~ 17:00");
+            }
+        });
+        //Friday
+        Week[0][4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Friday 8:00 ~ 9:00");
+            }
+        });
+        Week[1][4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Friday 9:00 ~ 10:00");
+            }
+        });
+        Week[2][4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Friday 10:00 ~ 11:00");
+            }
+        });
+        Week[3][4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Friday 11:00 ~ 12:00");
+            }
+        });
+        Week[4][4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Friday 13:00 ~ 14:00");
+            }
+        });
+        Week[5][4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Friday 14:00 ~ 15:00");
+            }
+        });
+        Week[6][4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Friday 15:00 ~ 16:00");
+            }
+        });
+        Week[7][4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlertDialog_Permission_0("Friday 16:00 ~ 17:00");
+            }
+        });
+    }
+    private void setAlertDialog_Permission_1(String title,final String day,final String postion){
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View inputView = inflater.inflate(R.layout.curriculum_dialog, null);
@@ -338,7 +603,7 @@ public class Curriculum_fragment extends Fragment{
                     Toast.makeText(getActivity(), "Your class name is empty.", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    uploadClassName(className_edittext.getText().toString());
+                    uploadClassName(className_edittext.getText().toString(), day , postion);
                 }
             }
         })
@@ -353,7 +618,38 @@ public class Curriculum_fragment extends Fragment{
         builder.create();
         builder.show();
     }
-    private void uploadClassName(String className){
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+    private void setAlertDialog_Permission_0(String title){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View inputView = inflater.inflate(R.layout.curriculum_dialog, null);
+        final EditText className_edittext = (EditText) inputView.findViewById(R.id.curriculum_dialog_edittext);
+        //set two buttons
+        builder.setView(inputView)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //if your edittext is empty!!
+                        if(className_edittext.getText().toString().equals("")){
+                            Toast.makeText(getActivity(), "Your class name is empty.", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            //uploadClassName(className_edittext.getText().toString());
+                        }
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+        builder.setTitle(title);
+        builder.create();
+        builder.show();
+    }
+    private void uploadClassName(String className,String day, String position){
+        databaseReference = FirebaseDatabase.getInstance().getReference().child(ClassID).child("course").child(day).child(position);
+
     }
 }
