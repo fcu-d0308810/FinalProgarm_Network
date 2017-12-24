@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements
         databaseReference = FirebaseDatabase.getInstance();
         getUser();
         setContentView(R.layout.activity_main);
-
+        FirstInFragment();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -192,14 +192,11 @@ public class MainActivity extends AppCompatActivity implements
                 item1 = item;
             }
         }
-        if (id == R.id.nav_upload) {
+        if (id == R.id.nav_picture) {
             fragment = new picture_frament(ClassID,user);
         }
         else if(id == R.id.nav_curriculum){
-                fragment = new Curriculum_fragment(ClassID,user);
-        }
-        else if(id == R.id.nav_download){
-            fragment = new Download_fragment();
+            fragment = new Curriculum_fragment(ClassID,user);
         }
         else if (id == R.id.nav_message) {
             fragment = new Message_fragment(ClassID ,user);
@@ -207,8 +204,8 @@ public class MainActivity extends AppCompatActivity implements
         else if(id == R.id.nav_note){
             fragment = new Note_fragment();
         }
-        else if (id == R.id.nav_other) {
-            fragment = new OtherFunction_fragment();
+        else if (id == R.id.nav_personal) {
+            fragment = new Personal_fragment(user);
         }
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -220,5 +217,12 @@ public class MainActivity extends AppCompatActivity implements
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+    private void FirstInFragment(){
+        Fragment fragment = new Note_fragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTrans = fragmentManager.beginTransaction();
+        fragmentTrans.addToBackStack(null);
+        fragmentTrans.replace(R.id.content_main, fragment);
+        fragmentTrans.commit();
+    }
 }
