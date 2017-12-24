@@ -67,6 +67,7 @@ public class picture_frament extends Fragment {
     public picture_frament(String ClassID, User user){
         this.user = user;
         this.ClassID = ClassID;
+        Log.i("Pic ClassID", ClassID);
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         rootView = inflater.inflate(R.layout.picture_fragment, container, false);
@@ -161,7 +162,7 @@ public class picture_frament extends Fragment {
                         //if your edittext is empty!!
                         if(pictureName_edittext.getText().toString().equals("")){
                             setAlertDialog("Upload Picture", picture);
-                            Toast.makeText(getActivity(), "Your class name is empty.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Your name is empty.", Toast.LENGTH_SHORT).show();
                         }
                         else{
                             uploadFile(pictureName_edittext.getText().toString());
@@ -284,7 +285,7 @@ public class picture_frament extends Fragment {
                                     Toast.makeText(getActivity(), "File Uploaded ", Toast.LENGTH_SHORT).show();
                                     RFile rFile = new RFile(PictureName, user.getName(), uri.toString());
                                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
-                                            .child("TEST0919").child("storage").child("file"+ Calendar.getInstance().getTime().toString());
+                                            .child(ClassID).child("storage").child("file"+ Calendar.getInstance().getTime().toString());
                                     databaseReference.setValue(rFile);
                                 }
                             });
