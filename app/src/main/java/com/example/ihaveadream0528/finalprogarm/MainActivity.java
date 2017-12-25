@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements
         databaseReference = FirebaseDatabase.getInstance();
         getUser();
         setContentView(R.layout.activity_main);
-        FirstInFragment();
+        //FirstInFragment();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements
                                 Log.i("user name",user.getName());
                                 Log.i("user permission", String.valueOf(user.getPermission()));
                                 Log.i("user self", user.getIntroduction());
+                                FirstInFragment();
                             }
                         }
                         @Override
@@ -202,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements
             fragment = new Message_fragment(ClassID ,user);
         }
         else if(id == R.id.nav_note){
-            fragment = new Note_fragment();
+            fragment = new Note_fragment(ClassID, firebaseUser.getUid(), user);
         }
         else if (id == R.id.nav_personal) {
             fragment = new Personal_fragment(user);
@@ -218,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements
         return true;
     }
     private void FirstInFragment(){
-        Fragment fragment = new Note_fragment();
+        Fragment fragment = new Note_fragment(ClassID, firebaseUser.getUid(), user);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTrans = fragmentManager.beginTransaction();
         fragmentTrans.addToBackStack(null);
