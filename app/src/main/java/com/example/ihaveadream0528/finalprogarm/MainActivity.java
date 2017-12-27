@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements
     private DatabaseReference UserRef, ClassRef;
     private User user;
     private String UserID, ClassID;
+    private int first_count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +117,11 @@ public class MainActivity extends AppCompatActivity implements
                                 Log.i("user name",user.getName());
                                 Log.i("user permission", String.valueOf(user.getPermission()));
                                 Log.i("user self", user.getIntroduction());
-                                FirstInFragment();
+
+                                if(first_count==0){
+                                    FirstInFragment();
+                                    first_count++;
+                                }
                             }
                         }
                         @Override
