@@ -18,7 +18,7 @@ public class News {
     public News(String title, String text){
         this.title = title;
         this.text = text;
-        DateFormat dateFormat = new SimpleDateFormat("MM-dd hh:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         this.time = dateFormat.format(new Date().getTime());
     }
 
