@@ -88,10 +88,6 @@ public class Note_fragment extends Fragment {
         }
     }
     private void setListView(View view){
-        //news_listview = (ListView) view.findViewById(R.id.note_news_listview);
-        //news_listview.setAdapter(new News_adapter(getActivity(), show_news));
-        //note_listview = (ListView) view.findViewById(R.id.note_note_listview);
-        //note_listview.setAdapter(new Notes_adapter(getActivity(), show_notes));
         news_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -249,17 +245,17 @@ public class Note_fragment extends Fragment {
 
                     }
                 })
-                .setNeutralButton("刪除", new DialogInterface.OnClickListener() {
+                .setNeutralButton("編輯", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        setAlertDialog_FIX(position, "Notes");
+                    }
+                })
+                .setNegativeButton("刪除", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         remove_databaseReference.child(ClassID).child("user").child(UID).child("note").child(notes_key.get(position)).removeValue();
                         Notes_Refresh();
-                    }
-                })
-                .setNegativeButton("編輯", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        setAlertDialog_FIX(position, "Notes");
                     }
                 });
 
