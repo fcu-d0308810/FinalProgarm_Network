@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="請 假 表"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="25dp"
+        android:textAlignment="center"/>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        android:editable="false"
+        android:clickable="true"
+        android:id="@+id/absence0_startdate_edittext"
+        android:hint="選 擇 開 始 日 期"
+        android:textAlignment="center"
+        />
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:textAlignment="center"
+        android:clickable="true"
+        android:editable="false"
+        android:hint="選 擇 開 始 時 間"
+        android:id="@+id/absence0_starttime_edittext"/>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="230dp"
+        android:textAlignment="center"
+        android:hint="選 擇 結 束 日 期"
+        android:clickable="true"
+        android:editable="false"
+        android:id="@+id/absence0_enddate_edittext"/>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="310dp"
+        android:hint="選 擇 結 束 時 間"
+        android:textAlignment="center"
+        android:editable="false"
+        android:clickable="true"
+        android:id="@+id/absence0_endtime_edittext"/>
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="390dp"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:text="提 交 請 假"
+        android:id="@+id/absence0_sendAbsence_button"/>
+</RelativeLayout>
