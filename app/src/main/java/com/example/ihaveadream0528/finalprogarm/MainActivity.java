@@ -213,6 +213,17 @@ public class MainActivity extends AppCompatActivity implements
         else if (id == R.id.nav_personal) {
             fragment = new Personal_fragment(user);
         }
+        else if(id == R.id.nav_absence){
+            if(user.getPermission()==1){
+                fragment = new Absence_fragment_1(ClassID, user);
+            }
+            else{
+                fragment = new Absence_fragment_0(ClassID, user);
+            }
+        }
+        else if(id == R.id.nav_group){
+            fragment = new Member_fragment(ClassID, user, firebaseUser.getUid());
+        }
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTrans = fragmentManager.beginTransaction();
