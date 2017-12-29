@@ -44,11 +44,12 @@ public class Member_fragment extends Fragment {
         return rootView;
     }
     private void getUsers(){
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                firebaseDatabase = FirebaseDatabase.getInstance();
+                databaseReference = firebaseDatabase.getReference();
                 show_user = new ArrayList<User>();
                 for(DataSnapshot i : dataSnapshot.child(ClassID).child("user").getChildren()){
                     if(i.child("name").getValue()!=null){

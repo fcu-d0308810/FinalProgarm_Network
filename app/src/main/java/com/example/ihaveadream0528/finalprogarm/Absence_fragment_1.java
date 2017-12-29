@@ -35,8 +35,6 @@ public class Absence_fragment_1 extends Fragment {
     public Absence_fragment_1(String ClassID, User user){
         this.ClassID = ClassID;
         this.user = user;
-        show_absence = new ArrayList<Absence>();
-        absence_key = new ArrayList<String>();
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         rootView = inflater.inflate(R.layout.absence_fragment_permission1, container, false);
@@ -61,13 +59,14 @@ public class Absence_fragment_1 extends Fragment {
                         absence.setReason(i.child("reason").getValue().toString());
                         absence.setStart(i.child("start").getValue().toString());
                         show_absence.add(absence);
+                        absence_key.add(i.getKey());
                     }
                 }
                 show_listview.setAdapter(new Absence_adapter(getActivity(), show_absence));
                 show_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                        setAlertDialog_NEWS_SHOW(position);
+                        setAlertDialog_ABSENCE_SHOW(position);
                     }
                 });
             }
@@ -78,7 +77,9 @@ public class Absence_fragment_1 extends Fragment {
             }
         });
     }
-    private void setAlertDialog_NEWS_SHOW(final int position) {
+    private void setAlertDialog_ABSENCE_SHOW(final int position) {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View inputView = inflater.inflate(R.layout.absence_show_dialog, null);
@@ -102,7 +103,7 @@ public class Absence_fragment_1 extends Fragment {
                         Refresh();
                     }
                 });
-        builder.setTitle(show_absence.get(position).getName().toString());
+        builder.setTitle(show_absence.get(position).getName());
         builder.create();
         builder.show();
     }
