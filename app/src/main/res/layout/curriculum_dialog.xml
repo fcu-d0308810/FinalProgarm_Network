@@ -10,7 +10,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="4dp"
-        android:hint="Course name"
+        android:hint="課程名稱"
         android:textAlignment="center"
         />
 

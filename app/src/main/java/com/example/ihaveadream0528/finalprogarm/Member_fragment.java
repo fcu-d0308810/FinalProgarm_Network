@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,13 +48,14 @@ public class Member_fragment extends Fragment {
     }
     private void getUsers(){
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 show_user = new ArrayList<User>();
                 for(DataSnapshot i : dataSnapshot.child(ClassID).child("user").getChildren()){
                     if(i.child("name").getValue()!=null){
+                        Log.i("firebaseuser", i.child("permission").getValue().toString());
                         if(i.getKey().equals(UID)){
 
                         }
@@ -61,12 +63,13 @@ public class Member_fragment extends Fragment {
                             User user = new User();
                             user.setName(i.child("name").getValue().toString());
                             user.setIntroduction(i.child("self").getValue().toString());
-                            if(i.child("permission").toString().equals("1")){
+                            if(i.child("permission").getValue().toString().equals("1")){
                                 user.setPermission(1);
                             }
                             else{
                                 user.setPermission(0);
                             }
+                            Log.i("user ", String.valueOf(user.getPermission()));
                             show_user.add(user);
                         }
                     }

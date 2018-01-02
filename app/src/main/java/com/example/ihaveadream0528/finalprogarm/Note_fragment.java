@@ -182,7 +182,12 @@ public class Note_fragment extends Fragment {
                     }
                 });
 
-        builder.setTitle(title);
+        if(title.equals("Add Note")){
+            builder.setTitle("新增備忘錄");
+        }
+        else{
+            builder.setTitle("新增公告");
+        }
         builder.create();
         builder.show();
     }
@@ -294,11 +299,14 @@ public class Note_fragment extends Fragment {
                                 News_Refresh();
                             }
                             else{
-                                show_notes.get(position).setText(content_edittext.getText().toString());
-                                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                                String time = dateFormat.format(new Date().getTime());
-                                fix_databaseReference.child(ClassID).child("user").child(UID).child("note").child(notes_key.get(position)).setValue(show_notes.get(position));
-                                Notes_Refresh();
+                                if(show_notes.get(position).getText().equals(content_edittext.getText().toString())){
+
+                                }
+                                else{
+                                    show_notes.get(position).setText(content_edittext.getText().toString());
+                                    fix_databaseReference.child(ClassID).child("user").child(UID).child("note").child(notes_key.get(position)).setValue(show_notes.get(position));
+                                    Notes_Refresh();
+                                }
                             }
                         }
                     }
