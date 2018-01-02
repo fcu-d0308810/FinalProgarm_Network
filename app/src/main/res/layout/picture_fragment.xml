@@ -15,7 +15,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="upload    picture"
+        android:text="上 傳 圖 片"
         android:textSize="18dp"
         android:id="@+id/picture_upload_button"/>
 

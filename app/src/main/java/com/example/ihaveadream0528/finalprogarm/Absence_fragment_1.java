@@ -35,6 +35,8 @@ public class Absence_fragment_1 extends Fragment {
     public Absence_fragment_1(String ClassID, User user){
         this.ClassID = ClassID;
         this.user = user;
+        show_absence = new ArrayList<Absence>();
+        absence_key = new ArrayList<String>();
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         rootView = inflater.inflate(R.layout.absence_fragment_permission1, container, false);

@@ -21,7 +21,8 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="4dp"
-        android:hint="Picture name"
+        android:hint="檔 案 名 稱"
+        android:textAlignment="center"
         android:id="@+id/picture_dialog_edittext"/>
 
 </LinearLayout>

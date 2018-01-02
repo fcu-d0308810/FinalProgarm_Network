@@ -143,7 +143,7 @@ public class picture_frament extends Fragment {
                     e.printStackTrace();
                 }
                 //showPic_view.setImageBitmap(bitmapImage);
-                setAlertDialog("Upload Picture", bitmapImage);
+                setAlertDialog("圖片上傳", bitmapImage);
             }
         }
     }
@@ -156,26 +156,26 @@ public class picture_frament extends Fragment {
         picture_imageView.setImageBitmap(picture);
         //set two buttons
         builder.setView(inputView)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton("確認", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //if your edittext is empty!!
                         if(pictureName_edittext.getText().toString().equals("")){
-                            setAlertDialog("Upload Picture", picture);
-                            Toast.makeText(getActivity(), "Your name is empty.", Toast.LENGTH_SHORT).show();
+                            setAlertDialog("圖片上傳", picture);
+                            Toast.makeText(getActivity(), "請不要空白", Toast.LENGTH_SHORT).show();
                         }
                         else{
                             uploadFile(pictureName_edittext.getText().toString());
                         }
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                     }
                 })
-                .setNeutralButton("Choose another", new DialogInterface.OnClickListener() {
+                .setNeutralButton("重選", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         PickPicture();
@@ -199,7 +199,7 @@ public class picture_frament extends Fragment {
         //設定Dialog的標題
         builder.setTitle(rFile.getFilename());
         //設定Positive按鈕資料
-        builder.setPositiveButton("Download", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("下載", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //按下按鈕時顯示快顯
@@ -207,7 +207,7 @@ public class picture_frament extends Fragment {
             }
         });
         //設定Negative按鈕資料
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //按下按鈕時顯示快顯
@@ -225,7 +225,7 @@ public class picture_frament extends Fragment {
         StorageReference  islandRef = storageRef.child(filename);
         Log.d("islandRef:", islandRef.toString());
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setTitle("Downloading");
+        progressDialog.setTitle("圖片下載");
         progressDialog.show();
         /*File rootPath = new File(Environment.getExternalStorageDirectory(), "PIC");
         if(!rootPath.exists()) {
@@ -242,19 +242,19 @@ public class picture_frament extends Fragment {
                 Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                 Log.e("firebase ",localFile.getAbsolutePath().toString());
                 //imageView.setImageBitmap(bitmap);
-                Toast.makeText(getActivity(),"Download Success",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"下載完成",Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 progressDialog.dismiss();
                 Log.e("firebase ",exception.toString());
-                Toast.makeText(getActivity(),"Download Failed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"下載失敗",Toast.LENGTH_SHORT).show();
             }
         }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onProgress(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                progressDialog.setMessage("Downloadeding....");
+                progressDialog.setMessage("下載中....");
             }
         });
     }
@@ -266,7 +266,7 @@ public class picture_frament extends Fragment {
 
             //displaying a progress dialog while upload is going on
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setTitle("Uploading");
+            progressDialog.setTitle("圖片上傳");
             progressDialog.show();
 
             StorageReference riversRef = storageReference.child("images/"+pictureName+".jpg");
@@ -282,7 +282,7 @@ public class picture_frament extends Fragment {
                                 public void onSuccess(Uri uri) {
                                     //get URL here.
                                     Log.d("URL :",uri.toString());
-                                    Toast.makeText(getActivity(), "File Uploaded ", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "上傳成功", Toast.LENGTH_SHORT).show();
                                     RFile rFile = new RFile(PictureName, user.getName(), uri.toString());
                                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
                                             .child(ClassID).child("storage").child("file"+ Calendar.getInstance().getTime().toString());
@@ -306,7 +306,7 @@ public class picture_frament extends Fragment {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            progressDialog.setMessage("Uploadeding....");
+                            progressDialog.setMessage("上傳中....");
                         }
                     });
 
@@ -314,7 +314,7 @@ public class picture_frament extends Fragment {
         //if there is not any file
         else {
             //you can display an error toast
-            Toast.makeText(getActivity(), "There isn't a file", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "沒有這個檔案", Toast.LENGTH_SHORT).show();
         }
     }
     private void verifyStoragePermissions(Activity activity) {

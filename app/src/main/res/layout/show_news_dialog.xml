@@ -10,6 +10,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="4dp"
         android:textColor="#000000"
+        android:textAlignment="center"
         android:textSize="20dp"
         android:id="@+id/news_dialog_time_textview"/>
     <TextView
@@ -19,7 +20,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="4dp"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:textAlignment="center"
         android:textColor="#000000"
         android:id="@+id/news_dialog_text_textview"/>

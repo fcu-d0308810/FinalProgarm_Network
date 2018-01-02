@@ -4,19 +4,22 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
-        android:textSize="25dp"
-        android:text="群 組 成 員"/>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="60dp"
-        android:id="@+id/member_listview"
-        android:divider="#00ffffff"
+        android:textSize="30dp"
+        android:text="群 組 成 員"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         />
 
+    <ListView
+        android:id="@+id/member_listview"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="55dp"
+        android:divider="#00ffffff"
+        android:background="@drawable/member_listview_boder"
+        android:footerDividersEnabled="false" />
 </RelativeLayout>

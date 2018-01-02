@@ -1,6 +1,7 @@
 package com.example.ihaveadream0528.finalprogarm;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,7 +31,7 @@ public class Register_page extends AppCompatActivity {
     private DatabaseReference class_databaseReference, user_databaseReference,userdetail_databaseReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
-    private ProgressBar progressBar;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +43,7 @@ public class Register_page extends AppCompatActivity {
         invitationCode_edittext = (EditText) findViewById(R.id.invitationCode_edittext);
         confirm_button = (Button) findViewById(R.id.confirm_button);
         userID_edittext = (EditText) findViewById(R.id.userid_edittext);
+        progressDialog = new ProgressDialog(this);
         confirm_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,39 +65,40 @@ public class Register_page extends AppCompatActivity {
         final String username = username_edittext.getText().toString().trim();
         final String invitationCode = invitationCode_edittext.getText().toString().trim();
         if(TextUtils.isEmpty(userID)){
-            Toast.makeText(getApplicationContext(), "email is Empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "請不要空白", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(getApplicationContext(), "password is Empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "請不要空白", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(username)){
-            Toast.makeText(getApplicationContext(), "username is Empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "請不要空白", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(invitationCode)){
-            Toast.makeText(getApplicationContext(), "invitationCode is Empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "請不要空白", Toast.LENGTH_SHORT).show();
             return;
         }
         if(password.length()<6){
-            Toast.makeText(getApplicationContext(), "password can't shorter than 6", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "密碼長度不可小於6", Toast.LENGTH_SHORT).show();
             return;
         }
-        //progressBar.setVisibility(View.VISIBLE);
+        progressDialog.setMessage("註冊中.....");
+        progressDialog.show();
         firebaseAuth.createUserWithEmailAndPassword(userID, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        //progressBar.setVisibility(View.GONE);
+                        progressDialog.dismiss();
                         if(task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "註冊成功", Toast.LENGTH_SHORT).show();
                             setUserDatabase(invitationCode, username);
                             finish();
                             startActivity(new Intent(Register_page.this, MainActivity.class));
                         }
                         else{
-                            Toast.makeText(getApplicationContext(), "Failed" + task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "註冊失敗" + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -104,20 +106,22 @@ public class Register_page extends AppCompatActivity {
     private void setUserDatabase(final String invitationCode, final String username){
         firebaseUser = firebaseAuth.getCurrentUser();
         final String UID = firebaseUser.getUid();
+        final String[] CID = new String[1];
         Log.i("Register UID", UID);
         class_databaseReference = firebaseDatabase.getReference();
-        class_databaseReference.addValueEventListener(new ValueEventListener() {
+        class_databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String CID = dataSnapshot.child("invitationCode").child(invitationCode).getValue().toString();
-                Log.i("Register CID",CID);
-                if(CID!=null){
+                CID[0] = dataSnapshot.child("invitationCode").child(invitationCode).getValue().toString();
+                Log.i("Register CID", CID[0]);
+                if(CID[0] !=null){
                     user_databaseReference = firebaseDatabase.getReference();
-                    user_databaseReference.child("user").child(UID).child("class").setValue(CID);
-                    userdetail_databaseReference = firebaseDatabase.getReference().child(CID).child("user").child(UID);
+                    user_databaseReference.child("user").child(UID).child("class").setValue(CID[0]);
+                    userdetail_databaseReference = firebaseDatabase.getReference().child(CID[0]).child("user").child(UID);
                     userdetail_databaseReference.child("name").setValue(username);
+                    userdetail_databaseReference.child("note").child("test").setValue(new Notes("歡迎加入","謝謝您使用本服務"));
                     userdetail_databaseReference.child("permission").setValue("0");
-                    userdetail_databaseReference.child("self").setValue(" ");
+                    userdetail_databaseReference.child("self").setValue("大家好！");
                     Log.i("set Database"," Finish");
                 }
             }
@@ -127,5 +131,6 @@ public class Register_page extends AppCompatActivity {
 
             }
         });
+
     }
 }

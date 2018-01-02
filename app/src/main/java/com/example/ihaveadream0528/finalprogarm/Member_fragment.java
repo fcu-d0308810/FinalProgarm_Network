@@ -40,6 +40,8 @@ public class Member_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         rootView = inflater.inflate(R.layout.member_fragment, container, false);
         show_user_listView = (ListView) rootView.findViewById(R.id.member_listview);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
         getUsers();
         return rootView;
     }
@@ -48,8 +50,7 @@ public class Member_fragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                firebaseDatabase = FirebaseDatabase.getInstance();
-                databaseReference = firebaseDatabase.getReference();
+
                 show_user = new ArrayList<User>();
                 for(DataSnapshot i : dataSnapshot.child(ClassID).child("user").getChildren()){
                     if(i.child("name").getValue()!=null){

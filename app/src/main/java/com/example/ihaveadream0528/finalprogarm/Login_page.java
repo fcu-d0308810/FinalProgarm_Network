@@ -77,14 +77,14 @@ public class Login_page extends AppCompatActivity implements View.OnClickListene
         final String email = email_edittext.getText().toString().trim();
         final String password = password_edittext.getText().toString().trim();
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "請不要空白", Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "請不要空白", Toast.LENGTH_SHORT).show();
             return;
         }
-        progressDialog.setMessage("Loading please wait...");
+        progressDialog.setMessage("登入中.....");
         progressDialog.show();
         firebaseAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -96,7 +96,7 @@ public class Login_page extends AppCompatActivity implements View.OnClickListene
                             startActivity(new Intent(Login_page.this, MainActivity.class));
                         }
                         else{
-                            Toast.makeText(getApplicationContext(), "Something Worng", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "登入失敗", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

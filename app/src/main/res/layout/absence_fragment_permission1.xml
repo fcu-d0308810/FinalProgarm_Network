@@ -11,12 +11,15 @@
         android:layout_marginTop="7dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="30dp" />
+
     <ListView
+        android:id="@+id/absence_show_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
-        android:id="@+id/absence_show_listview"
-        android:divider="#00ffffff"/>
+        android:background="@drawable/member_listview_boder"
+        android:divider="#00ffffff"
+        android:dividerHeight="5dp" />
 
 
 </RelativeLayout>

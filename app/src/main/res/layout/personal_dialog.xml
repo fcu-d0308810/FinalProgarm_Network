@@ -5,13 +5,13 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/absence_dialog_keyreason_edittext"
+        android:id="@+id/rename_dialog_edittext"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="4dp"
-        android:hint="寫下您的原因"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        />
+        android:textSize="25dp"
+        android:hint="請輸入內容"
+        android:textAlignment="center" />
+
 </LinearLayout>

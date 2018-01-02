@@ -91,11 +91,12 @@ public class MainActivity extends AppCompatActivity implements
         }
         final String UID = firebaseUser.getUid();
         UserID = UID;
-        final String[] CID = new String[1];
+
         UserRef = databaseReference.getReference();
-        UserRef.addValueEventListener(new ValueEventListener() {
+        UserRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                final String[] CID = new String[1];
                 CID[0] = dataSnapshot.child("user").child(UID).child("class").getValue().toString();
                 ClassID = CID[0];
                 Log.i("Class Token", CID[0]);
@@ -211,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements
             fragment = new Note_fragment(ClassID, firebaseUser.getUid(), user);
         }
         else if (id == R.id.nav_personal) {
-            fragment = new Personal_fragment(user);
+            fragment = new Personal_fragment(ClassID, user, firebaseUser.getUid());
         }
         else if(id == R.id.nav_absence){
             if(user.getPermission()==1){

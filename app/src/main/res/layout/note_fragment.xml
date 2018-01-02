@@ -8,22 +8,26 @@
         android:layout_centerHorizontal="true"
         android:text="公 告"
         android:textSize="30dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textAlignment="center"
-        android:layout_marginTop="5dp"/>
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/note_news_add_textview"
         android:layout_marginLeft="270dp"
-        android:layout_marginTop="2dp"
         android:text="＋"
-        android:textSize="35dp"/>
+        android:textSize="35dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
     <ListView
+        android:id="@+id/note_news_listview"
         android:layout_width="match_parent"
         android:layout_height="205dp"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/member_listview_boder"
         android:divider="#00ffffff"
-        android:id="@+id/note_news_listview"
-        android:layout_marginTop="45dp"/>
+        android:dividerHeight="5dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
@@ -31,6 +35,7 @@
         android:text="備 忘 錄"
         android:textSize="30dp"
         android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:layout_marginTop="255dp"/>
     <TextView
         android:layout_width="wrap_content"
@@ -38,14 +43,18 @@
         android:id="@+id/note_note_add_textview"
         android:layout_marginLeft="270dp"
         android:layout_marginTop="252dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:text="＋"
         android:textSize="35dp"/>
+
     <ListView
+        android:id="@+id/note_note_listview"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="295dp"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/member_listview_boder"
         android:divider="#00ffffff"
-        android:id="@+id/note_note_listview"/>
+        android:dividerHeight="5dp" />
 
 
 </RelativeLayout>

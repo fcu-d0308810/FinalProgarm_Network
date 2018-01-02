@@ -20,7 +20,7 @@
                     />
             </menu>
         </item>
-        <item android:title="課 表">
+        <item android:title=" 課 表">
             <menu>
                 <item
                     android:id="@+id/nav_curriculum"
@@ -29,7 +29,7 @@
                     />
             </menu>
         </item>
-        <item android:title="訊 息">
+        <item android:title=" 訊 息">
             <menu>
                 <item
                     android:id="@+id/nav_message"
@@ -47,7 +47,7 @@
                     />
             </menu>
         </item>
-        <item android:title="公告">
+        <item android:title=" 公 告">
             <menu>
                 <item
                     android:id="@+id/nav_note"
@@ -56,7 +56,7 @@
                     />
             </menu>
         </item>
-        <item android:title="請假">
+        <item android:title=" 請 假">
             <menu>
                 <item
                     android:id="@+id/nav_absence"

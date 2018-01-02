@@ -7,6 +7,7 @@
         android:layout_alignParentStart="true"
         android:id="@+id/absence_listview_name_textview"
         android:textSize="25dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="5dp"
         android:textAlignment="center"/>
     <TextView
@@ -14,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="200dp"
         android:id="@+id/absence_listview_starttime_textview"
-        android:textSize="25dp"
-        android:layout_marginTop="5dp"
+        android:textSize="15dp"
+        android:layout_marginTop="15dp"
         android:textAlignment="center"/>
 </RelativeLayout>
