@@ -72,6 +72,7 @@ public class picture_frament extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         rootView = inflater.inflate(R.layout.picture_fragment, container, false);
         file_list = new ArrayList<RFile>();
+        verifyStoragePermissions(getActivity());
         storageReference = FirebaseStorage.getInstance().getReference();
         gridView = (GridView) rootView.findViewById(R.id.picture_gridview);
         upload_button = (Button) rootView.findViewById(R.id.picture_upload_button);
