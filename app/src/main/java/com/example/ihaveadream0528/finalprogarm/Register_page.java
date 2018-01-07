@@ -98,7 +98,7 @@ public class Register_page extends AppCompatActivity {
                             startActivity(new Intent(Register_page.this, MainActivity.class));
                         }
                         else{
-                            Toast.makeText(getApplicationContext(), "註冊失敗" + task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "註冊失敗", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
