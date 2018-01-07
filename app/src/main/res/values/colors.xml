@@ -7,4 +7,8 @@
     <item name="grey" type="color">#555555</item>
     <item name="green" type="color">#4499CC00</item>
     <item name="darkgreen" type="color">#FF669900</item>
+
+    <item name="default_background" type="color">#ffffff</item>
+    <item name="default_menu" type="color">#ffffff</item>
+    <item name="default_app_bar" type="color">#000000</item>
 </resources>
